@@ -60,6 +60,6 @@ fn <- list.files(path=dpath,pattern = "*.geojson",full.names = T)
 data <- vect(lapply(fn,vect))
 
 # Export into GPKG format  
-writeVector(data,paste0(dpath,"MS_BFP.gpkg"))  
+writeVector(data,paste0(dpath,"MS_BFP.gpkg"),overwrite=T)  
 
-
+length(fn)
