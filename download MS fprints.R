@@ -33,9 +33,9 @@ urls <-as.vector(pull(links_filt,Url)) # dplyr
 
 # Downloading (note that MS stored the files as csv but need to change extension to geojson)
 downloaded <- lapply(urls,function(url){
-  # extract the last part of the url to make the filename (this creates duplicates in the field name)
+  # extract the url to make the file name
   destination = unlist(strsplit(url, '/'))
-  destination = tail(destination,2) # taking 2 last pieces of the link string otherwise we get duplicates and miss files
+  destination = tail(destination,2) # taking last 2 pieces of the link string otherwise we get duplicates and miss files
   destination = paste(destination,collapse = "-")
   destination = paste0 (dpath, destination)
   # download the file
@@ -63,4 +63,4 @@ data <- vect(lapply(fn,vect))
 # Export into GPKG format  
 writeVector(data,paste0(dpath,"MS_BFP.gpkg"),overwrite=T)  
 
-length(fn)
+
