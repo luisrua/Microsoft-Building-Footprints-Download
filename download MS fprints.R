@@ -33,9 +33,10 @@ urls <-as.vector(pull(links_filt,Url)) # dplyr
 
 # Downloading (note that MS stored the files as csv but need to change extension to geojson)
 downloaded <- lapply(urls,function(url){
-  # extract the last part of the url to make the filename
+  # extract the last part of the url to make the filename (this creates duplicates in the field name)
   destination = unlist(strsplit(url, '/'))
-  destination = destination[length(destination)]
+  destination = tail(destination,2) # taking 2 last pieces of the link string otherwise we get duplicates and miss files
+  destination = paste(destination,collapse = "-")
   destination = paste0 (dpath, destination)
   # download the file
   download.file(url=url,destfile=destination)
